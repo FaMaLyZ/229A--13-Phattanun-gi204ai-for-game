@@ -8,6 +8,7 @@ public class PlayerController : MonoBehaviour
     private InputAction moveAction;
     private float horizontalInput;
     private float verticalInput;
+    public AudioSource audioSource;
     private void Awake()
     {
         moveAction = InputSystem.actions.FindAction("Move");
@@ -21,5 +22,11 @@ public class PlayerController : MonoBehaviour
 
         transform.Translate(horizontalInput * moveSpeed * Time.deltaTime * Vector3.left);
         transform.Translate(verticalInput * moveSpeed * Time.deltaTime * Vector3.up);
+    }
+    private void OnCollisionEnter(Collision collision)
+    {
+        
+        audioSource.Play();
+        Destroy(collision.gameObject);
     }
 }
